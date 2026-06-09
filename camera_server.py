@@ -102,9 +102,12 @@ def _get_cpu_pct() -> float | None:
 
 
 def _h264_level(w: int, h: int) -> str:
-    """Minimum H.264 level for the given resolution."""
-    # level 4 required for anything above 720p
-    return "4" if w * h > 1280 * 720 else "3.2"
+    if w * h > 1920 * 1080:
+        return "5"
+    elif w * h > 1280 * 720:
+        return "4"
+    else:
+        return "3.2"
 
 
 # --- Pipeline builder --------------------------------------------------------
@@ -314,6 +317,8 @@ def settings_post():
     patch = {k: v for k, v in data.items() if k in allowed}
     if not patch:
         return jsonify({"error": "no valid fields", "allowed": sorted(allowed)}), 400
+    if patch.get("width", 0) > 2592 or patch.get("height", 0) > 1944:
+        return jsonify({"error": "resolution exceeds OV5647 max (2592×1944)"}), 400
     _gst.restart_with(patch)
     return jsonify({"status": "restarting", "applied": patch})
 
