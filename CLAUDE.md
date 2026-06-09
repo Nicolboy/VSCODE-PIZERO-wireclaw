@@ -17,6 +17,7 @@
 - omxh264enc : non disponible sur Bookworm 64-bit (OpenMAX supprimé)
 - Transport : RTP H264 pt=96 UDP
 - Flask : API légère port 5000 (health + settings uniquement, pas de MJPEG local)
+- h264parse requis : `sudo apt install gstreamer1.0-plugins-bad -y`
 
 ## Réseau
 - Dev Freebox : 192.168.1.132 → Jetson 192.168.1.84:5600
@@ -26,12 +27,12 @@
 
 ### Hardware (v4l2h264enc) — défaut
 gst-launch-1.0 libcamerasrc ! \
-  video/x-raw,width=640,height=480,format=NV12,framerate=15/1 ! \
+  video/x-raw,width=1280,height=720,format=NV12,framerate=15/1 ! \
   v4l2convert ! \
-  v4l2h264enc video-bitrate=1000000 extra-controls="controls,repeat_sequence_header=1" ! \
+  v4l2h264enc ! \
   video/x-h264,level=(string)3.2 ! \
   h264parse ! \
-  rtph264pay config-interval=1 pt=96 ! \
+  rtph264pay config-interval=1 pt=96 ! queue ! \
   udpsink host=192.168.1.84 port=5600
 
 ### Software (x264enc) — fallback

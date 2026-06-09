@@ -117,13 +117,11 @@ def _build_pipeline(cfg: dict, encoder: str) -> str:
     sink = f"rtph264pay config-interval=1 pt=96 ! queue ! udpsink host={host} port={port}"
 
     if encoder == "hw":
-        bitrate_bps = cfg["bitrate_kbps"] * 1000
         return (
             f"libcamerasrc ! "
             f"video/x-raw,width={w},height={h},format=NV12,framerate={fps}/1 ! "
             f"v4l2convert ! "
-            f"v4l2h264enc video-bitrate={bitrate_bps} "
-            f'extra-controls="controls,repeat_sequence_header=1" ! '
+            f"v4l2h264enc ! "
             f"video/x-h264,level=(string){level} ! "
             f"h264parse ! "
             f"{sink}"
