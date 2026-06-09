@@ -82,19 +82,12 @@ def _h264_level(w: int, h: int) -> str:
 
 # --- Pipeline builder --------------------------------------------------------
 
-def _build_pipeline(cfg: dict, encoder: str, overlay_text: str) -> str:
+def _build_pipeline(cfg: dict, encoder: str) -> str:
     w, h, fps = cfg["width"], cfg["height"], cfg["fps"]
     host, port = cfg["jetson_host"], cfg["jetson_port"]
     level = _h264_level(w, h)
 
-    sink = f"rtph264pay config-interval=1 pt=96 ! udpsink host={host} port={port}"
-
-    # shlex-safe: repr() wraps in single quotes, preserving spaces inside text value
-    overlay = (
-        f"textoverlay text={overlay_text!r} "
-        f"valignment=top halignment=left "
-        f'font-desc="Sans Bold 24" draw-shadow=true'
-    )
+    sink = f"rtph264pay config-interval=1 pt=96 ! queue ! udpsink host={host} port={port}"
 
     if encoder == "hw":
         bitrate_bps = cfg["bitrate_kbps"] * 1000
@@ -102,22 +95,15 @@ def _build_pipeline(cfg: dict, encoder: str, overlay_text: str) -> str:
             f"libcamerasrc ! "
             f"video/x-raw,width={w},height={h},format=NV12,framerate={fps}/1 ! "
             f"v4l2convert ! "
-            f"videoconvert ! "
-            f"{overlay} ! "
-            f"videoconvert ! "
-            f"v4l2convert ! video/x-raw,format=I420 ! "
             f"v4l2h264enc video-bitrate={bitrate_bps} "
             f'extra-controls="controls,repeat_sequence_header=1" ! '
             f"video/x-h264,level=(string){level} ! "
             f"h264parse ! "
             f"{sink}"
         )
-    # sw — videoconvert handles any format before and after textoverlay
     return (
         f"libcamerasrc ! "
         f"video/x-raw,width={w},height={h},framerate={fps}/1 ! "
-        f"videoconvert ! "
-        f"{overlay} ! "
         f"videoconvert ! "
         f"x264enc tune=zerolatency bitrate={cfg['bitrate_kbps']} ! "
         f"{sink}"
@@ -201,11 +187,7 @@ class GstManager:
         with self._lock:
             cfg = dict(self._cfg)
 
-        temp = _get_temp_celsius()
-        temp_str = f"{temp:.1f}C" if temp is not None else "?C"
-        overlay_text = f"temp={temp_str}  {cfg['fps']}fps  {cfg['width']}x{cfg['height']}"
-
-        pipeline = _build_pipeline(cfg, encoder, overlay_text)
+        pipeline = _build_pipeline(cfg, encoder)
         cmd = ["gst-launch-1.0", "-e"] + shlex.split(pipeline)
         log.info("GStreamer [%s] pipeline: %s", encoder, pipeline)
         try:
