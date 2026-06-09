@@ -102,7 +102,7 @@ def _build_pipeline(cfg: dict, encoder: str, overlay_text: str) -> str:
         return (
             f"libcamerasrc ! "
             f"video/x-raw,width={w},height={h},format=NV12,framerate={fps}/1 ! "
-            f"v4l2convert ! video/x-raw,format=NV12 ! "
+            f"v4l2convert ! video/x-raw,format=I420 ! "
             f"{overlay} ! "
             f"v4l2h264enc video-bitrate={bitrate_bps} "
             f'extra-controls="controls,repeat_sequence_header=1" ! '
