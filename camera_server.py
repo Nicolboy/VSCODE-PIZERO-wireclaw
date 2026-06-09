@@ -53,6 +53,7 @@ DEFAULTS: dict = {
 
 FLASK_PORT    = 5000
 SIDEBAND_PORT = 5602
+START_TIME    = time.time()
 
 # --- Logging -----------------------------------------------------------------
 
@@ -65,13 +66,39 @@ log = logging.getLogger(__name__)
 # --- Helpers -----------------------------------------------------------------
 
 def _get_temp_celsius() -> float | None:
-    """Read SoC temperature via vcgencmd. Returns None if unavailable."""
     try:
         out = subprocess.check_output(["vcgencmd", "measure_temp"], text=True, timeout=1)
-        # output: "temp=45.2'C"
         return float(out.strip().split("=")[1].replace("'C", ""))
     except Exception:
         return None
+
+
+def _get_throttled() -> bool:
+    try:
+        out = subprocess.check_output(["vcgencmd", "get_throttled"], text=True, timeout=1)
+        # output: "throttled=0x0"
+        return out.strip().split("=")[1] != "0x0"
+    except Exception:
+        return False
+
+
+def _get_cpu_pct() -> float | None:
+    """Read /proc/stat twice 0.5 s apart, return CPU busy %."""
+    def _read() -> list[int] | None:
+        try:
+            with open("/proc/stat") as f:
+                return [int(x) for x in f.readline().split()[1:]]
+        except Exception:
+            return None
+
+    s1 = _read()
+    time.sleep(0.5)
+    s2 = _read()
+    if s1 is None or s2 is None:
+        return None
+    d_total = sum(s2) - sum(s1)
+    d_idle  = (s2[3] + s2[4]) - (s1[3] + s1[4])  # idle + iowait
+    return round(100.0 * (1 - d_idle / d_total), 1) if d_total else 0.0
 
 
 def _h264_level(w: int, h: int) -> str:
@@ -118,20 +145,26 @@ def _sideband_worker(gst: "GstManager") -> None:
     try:
         while not gst._shutdown.is_set():
             cfg = gst.get_cfg()
-            temp = _get_temp_celsius()
+            cpu_pct   = _get_cpu_pct()      # blocks 0.5 s internally
+            temp      = _get_temp_celsius()
+            throttled = _get_throttled()
             payload = json.dumps({
-                "ts":       time.time(),
-                "width":    cfg["width"],
-                "height":   cfg["height"],
-                "fps":      cfg["fps"],
-                "encoder":  gst.encoder_active or "unknown",
-                "temp_c":   temp,
+                "ts":           time.time(),
+                "width":        cfg["width"],
+                "height":       cfg["height"],
+                "fps":          cfg["fps"],
+                "encoder":      gst.encoder_active or "unknown",
+                "bitrate_kbps": cfg["bitrate_kbps"],
+                "temp_c":       temp,
+                "cpu_pct":      cpu_pct,
+                "throttled":    throttled,
+                "uptime_s":     int(time.time() - START_TIME),
             }).encode()
             try:
                 sock.sendto(payload, (cfg["jetson_host"], SIDEBAND_PORT))
             except OSError as exc:
                 log.debug("sideband send: %s", exc)
-            time.sleep(1)
+            time.sleep(0.5)   # 0.5 s cpu read + 0.5 s sleep ≈ 1 Hz
     finally:
         sock.close()
 
