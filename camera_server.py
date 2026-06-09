@@ -98,12 +98,14 @@ def _build_pipeline(cfg: dict, encoder: str, overlay_text: str) -> str:
 
     if encoder == "hw":
         bitrate_bps = cfg["bitrate_kbps"] * 1000
-        # Explicit NV12 cap after v4l2convert so textoverlay and v4l2h264enc agree on format
         return (
             f"libcamerasrc ! "
             f"video/x-raw,width={w},height={h},format=NV12,framerate={fps}/1 ! "
-            f"v4l2convert ! video/x-raw,format=I420 ! "
+            f"v4l2convert ! "
+            f"videoconvert ! "
             f"{overlay} ! "
+            f"videoconvert ! "
+            f"v4l2convert ! video/x-raw,format=I420 ! "
             f"v4l2h264enc video-bitrate={bitrate_bps} "
             f'extra-controls="controls,repeat_sequence_header=1" ! '
             f"video/x-h264,level=(string){level} ! "
