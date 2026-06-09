@@ -175,6 +175,7 @@ class GstManager:
         self._lock = threading.Lock()
         self._proc: subprocess.Popen | None = None
         self._shutdown = threading.Event()
+        self._reset_encoder = threading.Event()
         self._thread: threading.Thread | None = None
         self.encoder_active: str | None = None
 
@@ -192,6 +193,7 @@ class GstManager:
     def restart_with(self, patch: dict) -> None:
         with self._lock:
             self._cfg.update(patch)
+        self._reset_encoder.set()
         self._terminate()
 
     def is_alive(self) -> bool:
@@ -235,17 +237,23 @@ class GstManager:
                 log.debug("gst: %s", stripped)
 
     def _worker(self) -> None:
-        with self._lock:
-            pref = self._cfg.get("encoder", "auto")
+        def _make_queue() -> tuple[list[str], str]:
+            with self._lock:
+                p = self._cfg.get("encoder", "auto")
+            if p == "hw":
+                return ["hw"], p
+            if p == "sw":
+                return ["sw"], p
+            return ["hw", "sw"], p
 
-        if pref == "hw":
-            queue = ["hw"]
-        elif pref == "sw":
-            queue = ["sw"]
-        else:
-            queue = ["hw", "sw"]
+        queue, pref = _make_queue()
 
         while not self._shutdown.is_set():
+            if self._reset_encoder.is_set():
+                self._reset_encoder.clear()
+                queue, pref = _make_queue()
+                log.info("Encoder queue reset → %s", queue)
+
             for enc in queue:
                 proc = self._launch(enc)
                 if proc is None:
@@ -267,7 +275,7 @@ class GstManager:
                 log.warning("GStreamer [%s] exited rc=%d", enc, rc)
 
                 if enc == "hw" and pref == "auto":
-                    log.warning("Hardware encoder failed — permanent fallback to x264enc")
+                    log.warning("Hardware encoder failed — fallback to x264enc")
                     queue = ["sw"]
 
                 break  # restart outer while-loop with updated queue
