@@ -47,5 +47,16 @@ gst-launch-1.0 libcamerasrc ! \
 - Pas de traitement local (YOLOv8 tourne sur le Jetson CUDA)
 - Réglages caméra via POST /settings (proxyfié depuis FastAPI Jetson)
 
+## Installation
+```bash
+git clone https://git.syoul.fr/nicoboy/wireclaw-pizero
+cd wireclaw-pizero
+bash install.sh
+cp .env.dev .env
+python3 camera_server.py
+```
+
 ## Repo
 git.syoul.fr/nicoboy/wireclaw-pizero
+
+Après clone : `bash install.sh`
