@@ -1,0 +1,232 @@
+nohup: ignoring input
+2026-06-09 17:04:15,080 [INFO] Sideband UDP ready (→ port 5602)
+2026-06-09 17:04:15,090 [INFO] GStreamer [hw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,format=NV12,framerate=10/1 ! v4l2convert ! video/x-raw,format=I420 ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! v4l2h264enc video-bitrate=2500000 extra-controls="controls,repeat_sequence_header=1" ! video/x-h264,level=(string)4 ! h264parse ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:15,093 [INFO] RTP stream running (encoder=hw)
+2026-06-09 17:04:15,355 [WARNING] GStreamer [hw] exited rc=1
+2026-06-09 17:04:15,356 [WARNING] Hardware encoder failed — permanent fallback to x264enc
+2026-06-09 17:04:15,356 [INFO] Restarting in 3 s…
+2026-06-09 17:04:16,082 [INFO] Flask API on 0.0.0.0:5000
+ * Serving Flask app 'camera_server'
+ * Debug mode: off
+2026-06-09 17:04:16,151 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.132:5000
+2026-06-09 17:04:16,152 [INFO] [33mPress CTRL+C to quit[0m
+2026-06-09 17:04:18,368 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:18,370 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:18,827 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:18,827 [INFO] Restarting in 3 s…
+2026-06-09 17:04:21,835 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:21,838 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:22,239 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:22,240 [INFO] Restarting in 3 s…
+2026-06-09 17:04:25,252 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:25,254 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:25,652 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:25,652 [INFO] Restarting in 3 s…
+2026-06-09 17:04:28,664 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.3C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:28,666 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:29,065 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:29,065 [INFO] Restarting in 3 s…
+2026-06-09 17:04:32,075 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:32,078 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:32,514 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:32,514 [INFO] Restarting in 3 s…
+2026-06-09 17:04:35,522 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.3C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:35,525 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:35,994 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:35,994 [INFO] Restarting in 3 s…
+2026-06-09 17:04:39,010 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:39,014 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:39,412 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:39,412 [INFO] Restarting in 3 s…
+2026-06-09 17:04:42,418 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:42,420 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:42,823 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:42,824 [INFO] Restarting in 3 s…
+2026-06-09 17:04:45,832 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:45,834 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:46,226 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:46,226 [INFO] Restarting in 3 s…
+2026-06-09 17:04:49,234 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:49,238 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:49,664 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:49,665 [INFO] Restarting in 3 s…
+2026-06-09 17:04:52,672 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:52,678 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:53,075 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:53,076 [INFO] Restarting in 3 s…
+2026-06-09 17:04:56,082 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:56,084 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:56,524 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:56,524 [INFO] Restarting in 3 s…
+2026-06-09 17:04:59,536 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:04:59,542 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:04:59,957 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:04:59,957 [INFO] Restarting in 3 s…
+2026-06-09 17:05:02,964 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:02,966 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:03,410 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:03,411 [INFO] Restarting in 3 s…
+2026-06-09 17:05:06,418 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:06,422 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:06,853 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:06,853 [INFO] Restarting in 3 s…
+2026-06-09 17:05:09,860 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:09,862 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:10,277 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:10,277 [INFO] Restarting in 3 s…
+2026-06-09 17:05:13,288 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:13,294 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:13,743 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:13,743 [INFO] Restarting in 3 s…
+2026-06-09 17:05:16,750 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:16,752 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:17,201 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:17,201 [INFO] Restarting in 3 s…
+2026-06-09 17:05:20,212 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:20,222 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:20,621 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:20,621 [INFO] Restarting in 3 s…
+2026-06-09 17:05:23,628 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:23,630 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:24,030 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:24,030 [INFO] Restarting in 3 s…
+2026-06-09 17:05:27,043 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:27,046 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:27,494 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:27,494 [INFO] Restarting in 3 s…
+2026-06-09 17:05:30,502 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:30,505 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:30,899 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:30,899 [INFO] Restarting in 3 s…
+2026-06-09 17:05:33,910 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:33,922 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:34,339 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:34,339 [INFO] Restarting in 3 s…
+2026-06-09 17:05:37,349 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:37,354 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:37,800 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:37,801 [INFO] Restarting in 3 s…
+2026-06-09 17:05:40,812 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:40,818 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:41,211 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:41,211 [INFO] Restarting in 3 s…
+2026-06-09 17:05:44,219 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=55.8C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:44,222 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:44,618 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:44,619 [INFO] Restarting in 3 s…
+2026-06-09 17:05:47,632 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:47,634 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:48,066 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:48,066 [INFO] Restarting in 3 s…
+2026-06-09 17:05:51,072 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:51,074 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:51,479 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:51,480 [INFO] Restarting in 3 s…
+2026-06-09 17:05:54,488 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:54,494 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:54,908 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:54,909 [INFO] Restarting in 3 s…
+2026-06-09 17:05:57,920 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:05:57,923 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:05:58,379 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:05:58,379 [INFO] Restarting in 3 s…
+2026-06-09 17:06:01,389 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:01,398 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:01,822 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:01,822 [INFO] Restarting in 3 s…
+2026-06-09 17:06:04,830 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:04,833 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:05,230 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:05,231 [INFO] Restarting in 3 s…
+2026-06-09 17:06:08,239 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:08,242 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:08,631 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:08,631 [INFO] Restarting in 3 s…
+2026-06-09 17:06:11,642 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:11,646 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:12,093 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:12,093 [INFO] Restarting in 3 s…
+2026-06-09 17:06:15,104 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:15,107 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:15,502 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:15,502 [INFO] Restarting in 3 s…
+2026-06-09 17:06:18,512 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:18,514 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:18,912 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:18,912 [INFO] Restarting in 3 s…
+2026-06-09 17:06:21,920 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:21,924 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:22,346 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:22,346 [INFO] Restarting in 3 s…
+2026-06-09 17:06:25,358 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:25,360 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:25,794 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:25,794 [INFO] Restarting in 3 s…
+2026-06-09 17:06:28,803 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:28,806 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:29,206 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:29,207 [INFO] Restarting in 3 s…
+2026-06-09 17:06:32,214 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:32,217 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:32,613 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:32,614 [INFO] Restarting in 3 s…
+2026-06-09 17:06:35,623 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:35,626 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:36,059 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:36,059 [INFO] Restarting in 3 s…
+2026-06-09 17:06:39,065 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:39,068 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:39,487 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:39,488 [INFO] Restarting in 3 s…
+2026-06-09 17:06:42,496 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:42,502 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:42,888 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:42,889 [INFO] Restarting in 3 s…
+2026-06-09 17:06:45,895 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:45,897 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:46,344 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:46,344 [INFO] Restarting in 3 s…
+2026-06-09 17:06:49,356 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:49,359 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:49,772 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:49,773 [INFO] Restarting in 3 s…
+2026-06-09 17:06:52,779 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:52,782 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:53,193 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:53,193 [INFO] Restarting in 3 s…
+2026-06-09 17:06:56,199 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:56,201 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:06:56,637 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:06:56,638 [INFO] Restarting in 3 s…
+2026-06-09 17:06:59,645 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:06:59,648 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:00,074 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:00,075 [INFO] Restarting in 3 s…
+2026-06-09 17:07:03,085 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:07:03,087 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:03,505 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:03,506 [INFO] Restarting in 3 s…
+2026-06-09 17:07:06,516 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:07:06,519 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:06,919 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:06,920 [INFO] Restarting in 3 s…
+2026-06-09 17:07:09,928 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.4C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:07:09,930 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:10,366 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:10,366 [INFO] Restarting in 3 s…
+2026-06-09 17:07:13,374 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:07:13,386 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:13,797 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:13,797 [INFO] Restarting in 3 s…
+2026-06-09 17:07:16,804 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:07:16,806 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:17,197 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:17,198 [INFO] Restarting in 3 s…
+2026-06-09 17:07:20,210 [INFO] GStreamer [sw] pipeline: libcamerasrc ! video/x-raw,width=1920,height=1080,framerate=10/1 ! videoconvert ! textoverlay text='temp=56.9C  10fps  1920x1080' valignment=top halignment=left font-desc="Sans Bold 24" draw-shadow=true ! videoconvert ! x264enc tune=zerolatency bitrate=2500 ! rtph264pay config-interval=1 pt=96 ! udpsink host=192.168.1.84 port=5600
+2026-06-09 17:07:20,218 [INFO] RTP stream running (encoder=sw)
+2026-06-09 17:07:20,639 [WARNING] GStreamer [sw] exited rc=255
+2026-06-09 17:07:20,639 [INFO] Restarting in 3 s…
+2026-06-09 17:07:21,335 [INFO] Signal 15 — shutting down
