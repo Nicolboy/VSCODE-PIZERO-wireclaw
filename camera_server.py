@@ -9,6 +9,7 @@ Encoder strategy: v4l2h264enc hardware (default) → x264enc software (auto-fall
 Config: .env (base) overridden by .env.dev if present
 """
 
+import ipaddress
 import json
 import os
 import shlex
@@ -140,12 +141,30 @@ def _build_pipeline(cfg: dict, encoder: str) -> str:
 
 # --- Sideband UDP thread ------------------------------------------------------
 
+def _udp_sock(host: str) -> tuple:
+    """Return (socket, is_ipv6) with the right address family for host."""
+    try:
+        is_ipv6 = isinstance(ipaddress.ip_address(host), ipaddress.IPv6Address)
+    except ValueError:
+        is_ipv6 = False
+    family = socket.AF_INET6 if is_ipv6 else socket.AF_INET
+    return socket.socket(family, socket.SOCK_DGRAM), is_ipv6
+
+
 def _sideband_worker(gst: "GstManager") -> None:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    log.info("Sideband UDP ready (→ port %d)", SIDEBAND_PORT)
+    init_cfg = gst.get_cfg()
+    sock, is_ipv6 = _udp_sock(init_cfg["jetson_host"])
+    current_host = init_cfg["jetson_host"]
+    log.info("Sideband UDP ready (→ %s port %d)", "IPv6" if is_ipv6 else "IPv4", SIDEBAND_PORT)
     try:
         while not gst._shutdown.is_set():
             cfg = gst.get_cfg()
+            host = cfg["jetson_host"]
+            if host != current_host:
+                sock.close()
+                sock, is_ipv6 = _udp_sock(host)
+                current_host = host
+                log.info("Sideband socket recreated for new host %s (%s)", host, "IPv6" if is_ipv6 else "IPv4")
             cpu_pct   = _get_cpu_pct()      # blocks 0.5 s internally
             temp      = _get_temp_celsius()
             throttled = _get_throttled()
@@ -161,8 +180,9 @@ def _sideband_worker(gst: "GstManager") -> None:
                 "throttled":    throttled,
                 "uptime_s":     int(time.time() - START_TIME),
             }).encode()
+            addr = (host, SIDEBAND_PORT, 0, 0) if is_ipv6 else (host, SIDEBAND_PORT)
             try:
-                sock.sendto(payload, (cfg["jetson_host"], SIDEBAND_PORT))
+                sock.sendto(payload, addr)
             except OSError as exc:
                 log.debug("sideband send: %s", exc)
             time.sleep(0.5)   # 0.5 s cpu read + 0.5 s sleep ≈ 1 Hz
