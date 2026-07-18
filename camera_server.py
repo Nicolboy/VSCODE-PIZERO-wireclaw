@@ -3,7 +3,7 @@
 WireClaw — Pi Zero 2W camera server
 Flask API port 5000 : /health  /settings
 RTP H264 → Jetson via GStreamer subprocess
-Sideband JSON UDP port 5602 → Jetson (1 Hz)
+Sideband JSON UDP port 5602 → Jetson (1 Hz), via tunnel WFB-NG (10.5.0.1)
 
 Encoder strategy: v4l2h264enc hardware (default) → x264enc software (auto-fallback)
 Config: .env (base) overridden by .env.dev if present
@@ -54,6 +54,10 @@ DEFAULTS: dict = {
 
 FLASK_PORT    = 5000
 SIDEBAND_PORT = 5602
+# Sideband destination is intentionally decoupled from jetson_host (video target).
+# It always rides the WFB-NG radio tunnel (long-range link), never the short-range
+# WireClaw hotspot (takeoff/landing only) nor mycelium (deprecated for this link).
+SIDEBAND_HOST = os.environ.get("SIDEBAND_HOST", "10.5.0.1")   # WFB-NG tunnel IP (gs side)
 START_TIME    = time.time()
 
 # --- Logging -----------------------------------------------------------------
@@ -152,19 +156,14 @@ def _udp_sock(host: str) -> tuple:
 
 
 def _sideband_worker(gst: "GstManager") -> None:
-    init_cfg = gst.get_cfg()
-    sock, is_ipv6 = _udp_sock(init_cfg["jetson_host"])
-    current_host = init_cfg["jetson_host"]
-    log.info("Sideband UDP ready (→ %s port %d)", "IPv6" if is_ipv6 else "IPv4", SIDEBAND_PORT)
+    # Sideband destination is fixed (SIDEBAND_HOST) and independent from the
+    # video target (cfg["jetson_host"]) — patching the video destination via
+    # /settings must never silently break the sideband overlay.
+    sock, is_ipv6 = _udp_sock(SIDEBAND_HOST)
+    log.info("Sideband UDP ready (→ %s %s port %d)", SIDEBAND_HOST, "IPv6" if is_ipv6 else "IPv4", SIDEBAND_PORT)
     try:
         while not gst._shutdown.is_set():
             cfg = gst.get_cfg()
-            host = cfg["jetson_host"]
-            if host != current_host:
-                sock.close()
-                sock, is_ipv6 = _udp_sock(host)
-                current_host = host
-                log.info("Sideband socket recreated for new host %s (%s)", host, "IPv6" if is_ipv6 else "IPv4")
             cpu_pct   = _get_cpu_pct()      # blocks 0.5 s internally
             temp      = _get_temp_celsius()
             throttled = _get_throttled()
@@ -180,7 +179,7 @@ def _sideband_worker(gst: "GstManager") -> None:
                 "throttled":    throttled,
                 "uptime_s":     int(time.time() - START_TIME),
             }).encode()
-            addr = (host, SIDEBAND_PORT, 0, 0) if is_ipv6 else (host, SIDEBAND_PORT)
+            addr = (SIDEBAND_HOST, SIDEBAND_PORT, 0, 0) if is_ipv6 else (SIDEBAND_HOST, SIDEBAND_PORT)
             try:
                 sock.sendto(payload, addr)
             except OSError as exc:
