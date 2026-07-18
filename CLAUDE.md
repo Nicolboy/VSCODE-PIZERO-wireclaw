@@ -60,3 +60,14 @@ python3 camera_server.py
 git.syoul.fr/nicoboy/wireclaw-pizero
 
 Après clone : `bash install.sh`
+ ## Mise à jour du code sur le Pi Zero
+
+Le Pi Zero n'est joignable que depuis le Jetson (hotspot WireClaw,
+10.42.0.0/24). Après un commit/push sur ce repo (fait depuis le PC
+ou l'interface web Gitea), synchroniser le Pi Zero avec :
+
+    ssh jetson-pi "cd ~/wireclaw-pizero && git pull"
+
+Puis redémarrer le service concerné, par exemple :
+
+    ssh jetson-pi "sudo systemctl restart wireclaw-cam.service"
